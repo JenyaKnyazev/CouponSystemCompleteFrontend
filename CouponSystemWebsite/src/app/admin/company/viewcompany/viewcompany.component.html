@@ -1,0 +1,30 @@
+<h2>Companies</h2>
+<ul class="companies">
+    <li *ngFor="let company of companies" [class.selected]="company === selectedCompany" (click)="onSelect(company)">
+        <span class="badge">{{company.id}}</span> {{company.name}}
+    </li>
+</ul>
+
+<div *ngIf="selectedCompany">
+    <h2>{{selectedCompany.name | uppercase}} Details</h2>
+    <div><span>Id: </span>{{selectedCompany.id}}</div>
+    <div><span>Name: </span>{{selectedCompany.name}}</div>
+    <div><span>Email: </span>{{selectedCompany.email}}</div>
+    <div><span>Password: </span>{{selectedCompany.password}}</div>
+    <button (click)="removeCompany(selectedCompany.id)">Delete</button>
+    <div><span>Coupons: </span></div>
+    <ul class="coupons">
+        <li *ngFor="let coupon of selectedCompany.coupons">
+            <div><span>Id: </span>{{coupon.id}}</div>
+            <div><span>Image: </span>{{coupon.image}}</div>
+            <div><span>Price: </span>{{coupon.price}}</div>
+            <div><span>Title: </span>{{coupon.title}}</div>
+            <div><span>Category: </span>{{coupon.category}}</div>
+            <div><span>Amount: </span>{{coupon.amount}}</div>
+            <div><span>CompanyId: </span>{{coupon.companyId}}</div>
+            <div><span>Description: </span>{{coupon.description}}</div>
+            <div><span>StartDate: </span>{{coupon.startDate}}</div>
+            <div><span>EndDate: </span>{{coupon.endDate}}</div>
+        </li>
+    </ul>
+</div>

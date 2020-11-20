@@ -1,0 +1,52 @@
+<h2>Coupons</h2>
+
+<form [formGroup]="findCouponsByPriceForm" (ngSubmit)="findByMaxPriceSubmit()">
+    <div class="form-group">
+        <label for="maxPrice">Max Price</label>
+        <input type="text" formControlName="maxPrice" class="form-control" [ngClass]="{ 'is-invalid': submitted && f_findprice.maxPrice.errors }" />
+        <div *ngIf="submitted && f_findprice.maxPrice.errors" class="invalid-feedback">
+            <div *ngIf="f_findprice.maxPrice.errors.required">Max Price is required</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Find Coupons
+        </button>
+    </div>
+</form>
+
+<form [formGroup]="findCouponsByCategoryForm" (ngSubmit)="findByCategorySubmit()">
+    <div class="form-group">
+        <label for="category">Category</label>
+        <input type="text" formControlName="category" class="form-control" [ngClass]="{ 'is-invalid': submitted && f_findcategory.category.errors }" />
+        <div *ngIf="submitted && f_findcategory.category.errors" class="invalid-feedback">
+            <div *ngIf="f_findcategory.category.errors.required">Category is required</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Find Coupons
+        </button>
+    </div>
+</form>
+
+<ul class="coupons">
+    <li *ngFor="let coupon of coupons" [class.selected]="coupon === selectedCoupon" (click)="onSelect(coupon)">
+        <span class="badge">{{coupon.id}}</span> {{coupon.title}}
+    </li>
+</ul>
+
+<div *ngIf="selectedCoupon">
+    <h2>{{selectedCoupon.title | uppercase}} Details</h2>
+    <div><span>Id: </span>{{selectedCoupon.id}}</div>
+    <div><span>Category: </span>{{selectedCoupon.category}}</div>
+    <div><span>Title: </span>{{selectedCoupon.title}}</div>
+    <div><span>Description: </span>{{selectedCoupon.description}}</div>
+    <div><span>Image: </span>{{selectedCoupon.image}}</div>
+    <div><span>Start Date: </span>{{selectedCoupon.startDate}}</div>
+    <div><span>End Date: </span>{{selectedCoupon.endDate}}</div>
+    <div><span>Amount: </span>{{selectedCoupon.amount}}</div>
+    <div><span>Price: </span>{{selectedCoupon.price}}</div>
+</div>
